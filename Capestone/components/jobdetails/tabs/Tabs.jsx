@@ -3,6 +3,8 @@ import { View, Text, TouchableOpacity, FlatList } from 'react-native'
 
 import styles from './tabs.style'
 import { SIZES } from '../../../constants'
+import Specifics from '../specifics/Specifics'
+import { JobAbout } from '../..'
 
 const Tabs = ({ tabs, activeTab, setActiveTab }) => {
 
@@ -31,6 +33,8 @@ const Tabs = ({ tabs, activeTab, setActiveTab }) => {
         keyExtractor={item => item}
         contentContainerStyle={{ columnGap: SIZES.small / 2 }}
       />
+
+      
     </View>
   )
 }

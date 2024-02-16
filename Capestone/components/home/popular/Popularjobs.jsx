@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { View, Text, TouchableOpacity, FlatList, ActivityIndicator } from 'react-native'
 import { useRouter } from 'expo-router';
 
@@ -12,10 +12,16 @@ const Popularjobs = () => {
   const router = useRouter();
   const { data, isLoading, error } = useFetch(
     'search', {
-    query: 'Web Developer, India',
+    query: 'React Developer, India',
     num_pages: 1
   }
   )
+
+  const [selectedJobs, setSelectedJobs] = useState();
+  const handleCardPress = (item) => {
+    router.push(`/job-details/${item.job_id}`);
+    setSelectedJobs(item.job_id);
+  }
 
   return (
     <View style={styles.container}>
@@ -36,7 +42,10 @@ const Popularjobs = () => {
             <FlatList
               data={data}
               renderItem={({ item }) => (
-                <PopularJobCard item={item} />
+                <PopularJobCard
+                  item={item}
+                  selectedJob={selectedJobs}
+                  handleCardPress={handleCardPress} />
               )}
 
               keyExtractor={item => item?.job_id}
